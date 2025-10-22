@@ -11,7 +11,7 @@ Title: macbook pro M3 16 inch 2024
 import React, {useEffect} from 'react'
 import {useGLTF, useTexture} from '@react-three/drei'
 import {noChangeParts} from "../../constants/index.js";
-import {Color} from "three";
+import {Color, SRGBColorSpace} from "three";
 import useMacBookStore from "../../store";
 
 export default function MacBookModel16(props) {
@@ -22,6 +22,8 @@ export default function MacBookModel16(props) {
 
     //add screen image to the model
     const texture = useTexture('/screen.png');
+    texture.colorSpace = SRGBColorSpace; //no wash out colors
+    texture.needsUpdate = true;
 
     useEffect(() => {
         scene.traverse((child) => {
@@ -53,7 +55,7 @@ export default function MacBookModel16(props) {
       <mesh geometry={nodes.Object_82.geometry} material={materials.gMtYExgrEUqPfln} rotation={[Math.PI / 2, 0, 0]} />
       <mesh geometry={nodes.Object_96.geometry} material={materials.PaletteMaterial003} rotation={[Math.PI / 2, 0, 0]} />
       <mesh geometry={nodes.Object_107.geometry} material={materials.JvMFZolVCdpPqjj} rotation={[Math.PI / 2, 0, 0]} />
-      <mesh geometry={nodes.Object_123.geometry} material={materials.sfCQkHOWyrsLmor} rotation={[Math.PI / 2, 0, 0]} >
+      <mesh geometry={nodes.Object_123.geometry} rotation={[Math.PI / 2, 0, 0]} >
           {/*map a screen image*/}
           <meshBasicMaterial map={texture} />
       </mesh>
